@@ -9,7 +9,7 @@
 <style>
   .form-signup {
     width: 100%;
-    max-width: 330px;
+    max-width: 800px;
     padding: 15px;
     margin: auto;
     margin-top: 3rem;
@@ -20,17 +20,12 @@
   <div class="row">
     <main class="form-signup">
       <form method="post" class="form">
-        <h1 class="h3 mb-3 fw-normal">Sign up</h1>
+        <h1 class="h3 mb-3 fw-normal">New Doctor Sign up</h1>
         {% csrf_token %}
 
-        {{ form|crispy }}
+        {{ user_form|crispy }}
         <button class="btn btn-success" type="submit">Sign up</button>
       </form>
-      <p>
-        If you are Patient, please <a href="{% url 'accounts:new-patient' %}">Patient Sign Up</a> here.<br>
-
-        If you are Doctor, please <a href="{% url 'accounts:new-doctor' %}">Doctor Sign Up</a> here.
-      </p>
 
     </main>
 

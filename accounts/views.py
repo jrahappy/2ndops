@@ -7,6 +7,7 @@ from .forms import (
     CustomUserChangeForm,
     ProfileForm,
     PatientCreationForm,
+    DoctorCreationForm,
 )
 from django.contrib import messages
 
@@ -54,13 +55,34 @@ def user_profile(request):
 
 
 def new_patient(request):
+    user = None  # Define user here
     if request.method == "POST":
         user_form = PatientCreationForm(request.POST)
         if user_form.is_valid():
             user = user_form.save()
+            user.backend = "django.contrib.auth.backends.ModelBackend"
             login(request, user)
             return redirect("home")
     else:
         user_form = PatientCreationForm()
 
-    return render(request, "accounts/new_patient.html", {"user_form": user_form})
+    return render(
+        request, "accounts/new_patient.html", {"user_form": user_form, "user": user}
+    )
+
+
+def new_doctor(request):
+    user = None  # Define user here
+    if request.method == "POST":
+        user_form = DoctorCreationForm(request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.backend = "django.contrib.auth.backends.ModelBackend"
+            login(request, user)
+            return redirect("home")
+    else:
+        user_form = DoctorCreationForm()
+
+    return render(
+        request, "accounts/new_doctor.html", {"user_form": user_form, "user": user}
+    )
