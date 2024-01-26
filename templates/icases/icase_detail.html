@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block title %}About page{% endblock %}
+
+{% block content %}
+
+<h1>Case Detail</h1>
+<a href="{% url 'dashboard:icase-list' %}">Create a new case</a>
+<h1>{{ icase.name }}</h1>
+<p>{{ icase.id }}</p>
+<p>{{ icase.category }}</p>
+<p>{{ icase.target_cost }}</p>
+<p>{{ icase.description }}</p>
+<p>{{ icase.report }}</p>
+<p>{{ icase.tag }}</p>
+<p>Created At: {{ icase.created_at }}</p>
+
+<h2>Comments</h2>
+{% for comment in icase_comments %}
+<p>{{ comment.user }}</p>
+<p> {{ comment.cost }}</p>
+<p> {{ comment.terms }}</p>
+{% endfor %}
+
+{% endblock content %}

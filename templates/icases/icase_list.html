@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block title %}About page{% endblock %}
+
+{% block content %}
+<h1>Case list</h1>
+<a href="{% url 'dashboard:icase-create' %}">Create a new case</a>
+<a href="{% url 'dashboard:icase-list' %}">List</a>
+
+{% for icase in icases %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ icase.name }}</h5>
+        <p class="card-text">{{ icase.description }}</p>
+        <p class="card-text"><small class="text-muted">{{ icase.created_at }}</small></p>
+        <a href="{{ icase.get_absolute_url }}">{{ icase.id }}</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
