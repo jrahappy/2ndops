@@ -39,8 +39,10 @@
             <a class="nav-link" href="#">For Patients</a>
           </li>
 
-
           {% if user.is_authenticated %}
+
+          {% if user.profile.category == 'Patent' %}
+
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dashboard:icase-list' %}">Dashboard {{ user.profile.category }}</a>
@@ -61,6 +63,29 @@
           </li>
         </ul>
 
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard:icase-list' %}">Dashboard {{ user.profile.category }}</a>
+        </li>
+        </ul>
+
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hello
+              {{ user.username }}</a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'accounts:user-doctor-profile' %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:user-update' %}">Basic</a></li>
+              <li><a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a></li>
+              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+        {% endif %}
         {% else %}
 
         </ul>

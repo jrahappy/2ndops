@@ -8,6 +8,7 @@ from .forms import (
     ProfileForm,
     PatientCreationForm,
     DoctorCreationForm,
+    DoctorProfileForm,
 )
 from django.contrib import messages
 
@@ -50,6 +51,32 @@ def user_profile(request):
             profile_form = ProfileForm(instance=request.user.profile)
         else:
             profile_form = ProfileForm()
+
+    return render(request, "accounts/user_profile.html", {"profile_form": profile_form})
+
+
+@login_required
+def user_doctor_profile(request):
+    if request.method == "POST":
+        profile_form = DoctorProfileForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, "Your profile was successfully updated!")
+            return redirect("home")
+    else:
+        try:
+            profile = request.user.profile
+        except Profile.DoesNotExist:
+            profile = None
+
+        if profile:
+            profile_form = DoctorProfileForm(instance=request.user.profile)
+        else:
+            profile_form = DoctorProfileForm()
 
     return render(request, "accounts/user_profile.html", {"profile_form": profile_form})
 

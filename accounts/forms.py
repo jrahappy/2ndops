@@ -133,17 +133,11 @@ class CustomUserChangeForm(UserChangeForm):
         )
 
 
-GENDER_CHOICES = [
-    ("M", "Male"),
-    ("F", "Female"),
-    ("O", "Other"),
-]
-
-
 class ProfileForm(forms.ModelForm):
     birth_date = forms.DateField(
         widget=forms.DateInput(attrs={"type": "date"}), required=False
     )
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, required=False)
 
     class Meta:
         model = Profile
@@ -155,4 +149,43 @@ class ProfileForm(forms.ModelForm):
             "cellphone",
             "birth_date",
             "gender",
+        )
+
+
+class PatientProfileForm(forms.ModelForm):
+    birth_date = forms.DateField(
+        widget=forms.DateInput(attrs={"type": "date"}), required=False
+    )
+    gender = forms.ChoiceField(choices=GENDER_CHOICES, required=False)
+
+    class Meta:
+        model = Profile
+        fields = (
+            # "user",
+            "category",
+            # "avatar",
+            "bio",
+            "cellphone",
+            "birth_date",
+            "gender",
+        )
+
+
+class DoctorProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            # "user",
+            "category",
+            "organization",
+            "address",
+            "suite",
+            "city",
+            "state",
+            "zipcode",
+            "office_email",
+            "office_phone",
+            "cellphone",
+            "bio",
+            "avatar",
         )

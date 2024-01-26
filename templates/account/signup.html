@@ -9,7 +9,7 @@
 <style>
   .form-signup {
     width: 100%;
-    max-width: 330px;
+    max-width: 800px;
     padding: 15px;
     margin: auto;
     margin-top: 3rem;
@@ -19,22 +19,33 @@
 <div class="container">
   <div class="row">
     <main class="form-signup">
-      <form method="post" class="form">
-        <h1 class="h3 mb-3 fw-normal">Sign up</h1>
-        {% csrf_token %}
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">For Patient</h4>
+            </div>
+            <div class="card-body">
+              <a type="button" class="w-100 btn btn-lg btn-outline-primary" href="{% url 'accounts:new-patient' %}">Sign
+                up</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">For Doctor</h4>
+            </div>
+            <div class="card-body">
+              <a type="button" class="w-100 btn btn-lg btn-outline-primary" href="{% url 'accounts:new-doctor' %}">Sign
+                up </a>
 
-        {{ form|crispy }}
-        <button class="btn btn-success" type="submit">Sign up</button>
-      </form>
-      <p>
-        If you are Patient, please <a href="{% url 'accounts:new-patient' %}">Patient Sign Up</a> here.<br>
-
-        If you are Doctor, please <a href="{% url 'accounts:new-doctor' %}">Doctor Sign Up</a> here.
-      </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </main>
-
-
   </div>
 </div>
 
