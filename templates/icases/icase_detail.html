@@ -1,25 +1,137 @@
-{% extends '_base.html' %}
+{% extends 'dashboard/_base.html' %}
 
-{% block title %}About page{% endblock %}
+{% block title %}Detail page{% endblock %}
 
 {% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Cases detail</h4>
+        </div>
 
-<h1>Case Detail</h1>
-<a href="{% url 'dashboard:icase-list' %}">Create a new case</a>
-<h1>{{ icase.name }}</h1>
-<p>{{ icase.id }}</p>
-<p>{{ icase.category }}</p>
-<p>{{ icase.target_cost }}</p>
-<p>{{ icase.description }}</p>
-<p>{{ icase.report }}</p>
-<p>{{ icase.tag }}</p>
-<p>Created At: {{ icase.created_at }}</p>
+        <div class="p-2">
 
-<h2>Comments</h2>
-{% for comment in icase_comments %}
-<p>{{ comment.user }}</p>
-<p> {{ comment.cost }}</p>
-<p> {{ comment.terms }}</p>
-{% endfor %}
+            <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">Back to List</a>
+            <a class="btn btn-primary" href="{% url 'icases:icase-edit' icase.id  %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'icases:icase-delete' icase.id  %}">Delete</a>
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="" style="width:950px;">
+            <div class="d-flex justify-content-start">
+                <div class="p-2 " style="width:150px;">
+                    Case Category
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.category }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Target Cost
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.target_cost }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Case title
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.name }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Description
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.description }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Report
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    <a href="../../../{{ icase.report }}" target="_blank">/{{ icase.report }}</a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Status
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.status }}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Tags
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.tags }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="p-2" style="width:150px;">
+                    Created At
+                </div>
+                <div class="p-2">:</div>
+                <div class="p-2">
+                    {{ icase.created_at }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex flex-column  p-2 mb-3">
+
+        <h2>2nd opinions</h2>
+        <a href="{% url 'icases:tplan-create' %}">Create a new TPlan</a>
+
+        <h2>Comments</h2>
+
+        <div class="d-flex flex-row">
+
+            {% for comment in icase.icasecomment_set.all %}
+
+            <div class="card" style="width: 18rem; margin-right:1rem">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.user }}</h5>
+                    <p class="card-text">
+                        {{ comment.comment }}
+
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ comment.cost }}</li>
+                    <li class="list-group-item">{{ comment.visits }}</li>
+                    <li class="list-group-item">{{ comment.terms }}</li>
+
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Detail</a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+</main>
+
+
 
 {% endblock content %}

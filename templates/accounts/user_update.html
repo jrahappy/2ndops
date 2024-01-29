@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends 'dashboard/_base.html' %}
 {% load crispy_forms_tags %}
 
 {% block title %}Sign up{% endblock %}
@@ -6,31 +6,28 @@
 {% block content %}
 
 
-<style>
-    .form-signup {
-        width: 100%;
-        max-width: 330px;
-        padding: 15px;
-        margin: auto;
-        margin-top: 3rem;
-    }
-</style>
-
-<div class="container">
-    <div class="row">
-        <main class="form-signup">
-            <form method="post" class="form">
-                <h1 class="h3 mb-3 fw-normal">User update</h1>
+<main class="d-flex flex-column p-2">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Edit user basic information</h4>
+        </div>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">Go to my case list</a>
+            <a class="btn btn-danger" href="{% url 'account_change_password' %}">Change password</a>
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="" style="width:750px;">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ user_form | crispy}}
+                <input class="btn btn-primary" type="submit" value="Profile Save">
 
-                {{ user_form|crispy }}
-                <button class="btn btn-success" type="submit">Update</button>
             </form>
 
-        </main>
-
-
+        </div>
     </div>
-</div>
+</main>
 
 {% endblock content %}

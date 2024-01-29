@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>{% block title %}ImplantSavvy Dashboard{% endblock title %}</title>
+    <meta name="description" content="A framework for launching new Django projects quickly.">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+
+    {% block css %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    {% endblock %}
+
+
+</head>
+
+<body>
+    <div class="container">
+        <header class="p-3 mb-3 border-bottom ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/"
+                    class="d-flex align-items-center justify-content-start mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
+                    style="margin-right: 4rem;">
+
+                    <h4>ImplantSavvy</h4>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+                </ul>
+
+
+                <div class="dropdown text-end">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hello
+                        {{ user.username }}</a>
+                    </a>
+                    <ul class="dropdown-menu text-small" style="">
+                        <li><a class="dropdown-item" href="{% url 'accounts:user-profile' %}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:user-update' %}">Basic user information</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    </div>
+
+
+    <div class="container">
+        <div class="d-flex flex-row">
+            <div class="flex-shrink-0 p-3 bg-white" style="width: 200px;">
+
+
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#home-collapse" aria-expanded="true">
+                            Cases
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="{% url 'icases:icase-list' %}" class="link-dark rounded">List</a></li>
+                                <li><a href="#" class="link-dark rounded">New case</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#dashboard-collapse" aria-expanded="false">
+                            Dashboard
+                        </button>
+                        <div class="collapse" id="dashboard-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-dark rounded">Overview</a></li>
+                                <li><a href="#" class="link-dark rounded">Weekly</a></li>
+                                <li><a href="#" class="link-dark rounded">Monthly</a></li>
+                                <li><a href="#" class="link-dark rounded">Annually</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#orders-collapse" aria-expanded="false">
+                            Orders
+                        </button>
+                        <div class="collapse" id="orders-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-dark rounded">New</a></li>
+                                <li><a href="#" class="link-dark rounded">Processed</a></li>
+                                <li><a href="#" class="link-dark rounded">Shipped</a></li>
+                                <li><a href="#" class="link-dark rounded">Returned</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="border-top my-3"></li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#account-collapse" aria-expanded="false">
+                            Account
+                        </button>
+                        <div class="collapse" id="account-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                                <li><a href="#" class="link-dark rounded">New...</a></li>
+                                <li><a href="#" class="link-dark rounded">Profile</a></li>
+                                <li><a href="#" class="link-dark rounded">Settings</a></li>
+                                <li><a href="{% url 'account_logout' %}" class="link-dark rounded">Log out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-divider"></div>
+            <div class="flex-fill">
+
+                {% block content %}
+
+                {% endblock content %}
+
+
+            </div>
+        </div>
+        <footer class="py-3 my-4" style="border-top:1px solid;">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
+        </footer>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
+        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
+        crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

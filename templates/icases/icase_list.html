@@ -1,21 +1,105 @@
-{% extends '_base.html' %}
+{% extends 'dashboard/_base.html' %}
 
-{% block title %}About page{% endblock %}
+{% block title %}Cases {% endblock %}
 
 {% block content %}
-<h1>Case list</h1>
-<a href="{% url 'dashboard:icase-create' %}">Create a new case</a>
-<a href="{% url 'dashboard:icase-list' %}">List</a>
 
-{% for icase in icases %}
-<div class="card mb-3">
-    <div class="card-body">
-        <h5 class="card-title">{{ icase.name }}</h5>
-        <p class="card-text">{{ icase.description }}</p>
-        <p class="card-text"><small class="text-muted">{{ icase.created_at }}</small></p>
-        <a href="{{ icase.get_absolute_url }}">{{ icase.id }}</a>
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Case list</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'icases:icase-create' %}">Create a new case</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
     </div>
-</div>
-{% endfor %}
+    <hr>
+    <div class="p-2 ">
+        <div class="m-0 border-0">
+
+            <table class="table table-hover table-responsive" style="width:100%;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for icase in icases %}
+                    <tr>
+                        <td>{{ icase.id }}</td>
+                        <td>{{ icase.user.username }}</td>
+                        <td>{{ icase.name }}</td>
+                        <td>{{ icase.description }}</td>
+                        <td>{{ icase.created_at }}</td>
+                        <td>
+                            <a class="btn btn-info" href="{{ icase.get_absolute_url }}">Detail</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="7" style="text-align: center;">
+                            <div class="pagination">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1" aria-label="First">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">First</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                                                aria-label="Previous">
+                                                <span aria-hidden="true">&lsaquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
+                                        <li class="page-item disabled">
+                                            <span class="page-link">
+                                                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+                                            </span>
+                                        </li>
+
+                                        {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&rsaquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ paginator.num_pages }}"
+                                                aria-label="Last">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Last</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+</main>
+
+
+
 
 {% endblock content %}

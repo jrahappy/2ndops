@@ -143,12 +143,17 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = (
             # "user",
-            "category",
+            # "category",
             # "avatar",
             "bio",
             "cellphone",
             "birth_date",
             "gender",
+            "address",
+            "suite",
+            "city",
+            "state",
+            "zipcode",
         )
 
 

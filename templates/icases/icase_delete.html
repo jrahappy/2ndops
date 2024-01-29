@@ -1,0 +1,32 @@
+{% extends 'dashboard/_base.html' %}
+
+{% block title %}Detail page{% endblock %}
+
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Delete case</h4>
+        </div>
+
+        <div class="p-2">
+
+            <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">Back to List</a>
+            <a class="btn btn-primary" href="{% url 'icases:icase-edit' icase.id  %}">Edit</a>
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            {{ form }}
+            <input class="btn btn-danger" type="submit" value="Confirm">
+        </form>
+    </div>
+
+
+</main>
+
+
+
+{% endblock content %}
