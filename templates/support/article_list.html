@@ -1,0 +1,55 @@
+{% extends "support/_base.html" %}
+
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Article list</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'support:article-create' manual.id %}">Create new article</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div>
+            <h4 class="h2">{{manual.title}}</h4>
+            <p>{{manual.description}}</p>
+            <p>{{manual.product_name.name}}</p>
+        </div>
+        <div class="m-0 border-0">
+            <ul>
+                {% for article in page_obj %}
+                <li>
+                    <h2><a href="{% url 'support:article-detail' article.id %}">{{ article.subject }}</a></h2>
+                    <p>{{ article.description|truncatewords:5 }}</p>
+                </li>
+                {% empty %}
+                <li>No articles yet.</li>
+                {% endfor %}
+            </ul>
+            {% if page_obj.paginator.num_pages > 1 %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}

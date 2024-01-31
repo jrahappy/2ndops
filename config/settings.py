@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
     "icases.apps.IcasesConfig",
+    "support.apps.SupportConfig",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -125,12 +126,14 @@ USE_TZ = True
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
-
+MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 # https://whitenoise.readthedocs.io/en/latest/django.html
 STORAGES = {

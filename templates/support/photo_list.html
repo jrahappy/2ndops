@@ -1,0 +1,61 @@
+{% extends "support/_base.html" %}
+
+{% block content %}
+<style>
+    .image-thumbail {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .list-group-item a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Photo gallery</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'support:photo-create' %}">Add new photo</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="row g-5">
+            <div class="col-md-8 row-gap-3">
+
+                {% for photo in photos %}
+                <div class="col-md-4">
+                    <div class="card my-2">
+                        <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+
+
+                        <a href="#" class="btn btn-outline-dark btn-sm m-1">View</a>
+                        <p class="m-1">{{photo.name}}</p>
+                        <p class="m-1">{{photo.tags}}</p>
+                        <p class="m-1">http://127.0.0.1:8000/{{photo.image.url}}</p>
+
+                    </div>
+
+                </div>
+                {% empty %}
+                <h3>No photos...</h3>
+                {% endfor %}
+
+
+            </div>
+            <div class="col-md-4">
+
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}

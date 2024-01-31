@@ -1,0 +1,89 @@
+{% extends "support/_base.html" %}
+{% load markdown_filter %}
+
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <article class="blog-post">
+                <h2 class="display-6 link-body-emphasis mb-1">{{ manual.title }}</h2>
+                <p class="blog-post-meta">{{ manual.created_at }}</p>
+                <small class="text-body-secondary">by {{ manual.user.username }}</small>
+                <p>{{ manual.description | render_markdown }}</p>
+            </article>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'support:home' %}">Home</a>
+            <a class="btn btn-primary" href="{% url 'support:article-create' manual.id %}">New article</a>
+            <a class="btn btn-primary" href="{% url 'support:manual-reorder' manual.id %}">Re-Ordering</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="row g-5">
+            <div class="col-md-8 row-gap-3">
+
+                {% for article in article_list %}
+                <div class="mb-3 ">
+                    {% if article.orderx == 0 %}
+                    <div class="h4">
+                        {% elif article.orderx == 1 %}
+
+                        <div class="h5 ">
+                            {% endif %}
+                            {{ article.subject }} ({{ article.ordery }}/{{ article.orderx }})
+                            <a class="btn btn-light btn-sm"
+                                href="{% url 'support:article-update' manual.id article.id %}">
+                                Edit
+                            </a>
+                            <a class="btn btn-light btn-sm"
+                                href="{% url 'support:article-create-btw' manual.id article.id article.ordery article.orderx %}">
+                                Insert an article above..
+                            </a>
+                        </div>
+                        <div>
+                            <p>{{ article.description | render_markdown }}</p>
+                        </div>
+                        <div class="">
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+                    <div>No records</div>
+
+                    {% endfor %}
+
+                </div>
+                <div class="col-md-4">
+                    <p class="fs-6">Table of Content</p>
+                    <ul class="list-group">
+
+                        {% for article in article_list %}
+                        {% if article.orderx == 0 %}
+                        <li class="unsytle fs-6">{{ article.subject }}</li>
+                        {% elif article.orderx == 1 %}
+                        <ul>
+                            <li>{{ article.subject }}</li>
+                        </ul>
+
+                        {% endif %}
+
+
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+</main>
+{% endblock %}
+```

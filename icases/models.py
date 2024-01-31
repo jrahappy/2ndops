@@ -4,7 +4,7 @@ from accounts.models import CustomUser
 
 
 def upload_to_instance_folder(instance, filename):
-    return "reports/{0}/{1}".format(instance.user.id, filename)
+    return "files/reports/{0}/{1}".format(instance.user.id, filename)
 
 
 class ICase(models.Model):

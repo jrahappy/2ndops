@@ -1,0 +1,40 @@
+{% extends "support/_base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Create new article {% endblock %}
+
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Edit article of {{ manual.title }}</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'support:home'%}">Home</a>
+            <a class="btn btn-primary" href="{% url 'support:article-detail' manual.id article.id %}">Home</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="row g-5">
+            <div class="col-md-8">
+                <article class="blog-post">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form | crispy}}
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </article>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+```

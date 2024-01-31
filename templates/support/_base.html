@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support_sidebar.css' %}">
 
     {% endblock %}
 
@@ -44,8 +44,7 @@
                     <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
                     <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
                     <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-                    <li><a href="{% url 'support:home' %}" class="nav-link px-2 link-body-emphasis">Support</a>
-                    </li>
+                    <li><a href="{% url 'support:home' %}" class="nav-link px-2 link-body-emphasis">Support</a></li>
                 </ul>
 
 
@@ -77,12 +76,14 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#home-collapse" aria-expanded="true">
-                            Cases
+                            By product
                         </button>
                         <div class="collapse show" id="home-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="{% url 'icases:icase-list' %}" class="link-dark rounded">List</a></li>
-                                <li><a href="#" class="link-dark rounded">New case</a></li>
+                                {% for product in product_list %}
+                                <li><a href="#" class="link-dark rounded">{{ product.name }}</a></li>
+                                {% endfor %}
+
 
                             </ul>
                         </div>
@@ -90,47 +91,19 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#dashboard-collapse" aria-expanded="false">
-                            Dashboard
+                            By Manual name
                         </button>
-                        <div class="collapse" id="dashboard-collapse">
+                        <div class="collapse show" id="dashboard-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                                <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                                <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                                <li><a href="#" class="link-dark rounded">Annually</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#orders-collapse" aria-expanded="false">
-                            Orders
-                        </button>
-                        <div class="collapse" id="orders-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="#" class="link-dark rounded">New</a></li>
-                                <li><a href="#" class="link-dark rounded">Processed</a></li>
-                                <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                                <li><a href="#" class="link-dark rounded">Returned</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="border-top my-3"></li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#account-collapse" aria-expanded="false">
-                            Account
-                        </button>
-                        <div class="collapse" id="account-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                {% for manual in manual_list %}
+                                <li><a href="#" class="link-dark rounded">
+                                        {{ manual.title }}</a></li>
+                                {% endfor %}
 
-                                <li><a href="#" class="link-dark rounded">New...</a></li>
-                                <li><a href="#" class="link-dark rounded">Profile</a></li>
-                                <li><a href="#" class="link-dark rounded">Settings</a></li>
-                                <li><a href="{% url 'account_logout' %}" class="link-dark rounded">Log out</a></li>
                             </ul>
                         </div>
                     </li>
+
                 </ul>
             </div>
             <div class="b-divider"></div>
@@ -139,6 +112,10 @@
                 {% block content %}
 
                 {% endblock content %}
+
+                {% block right_side_content %}
+
+                {% endblock right_side_content %}
 
 
             </div>

@@ -1,0 +1,45 @@
+{% extends "support/_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Article Delete of {{ manual.title }}</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+
+            <a class="btn btn-info" href="{% url 'support:article-update' manual.id article.id %}">Edit this article</a>
+            <a class="btn btn-primary" href="{% url 'support:home'%}">Manual home</a>
+            <a class="btn btn-primary" href="{% url 'support:manual-detail' manual.id %}">
+                Back to Manual ({{manual.title }})
+            </a>
+            <a class="btn btn-danger" href="{% url 'support:article-delete' manual.id article.id %}">Delete</a>
+        </div>
+    </div>
+    <hr>
+    <div class="p-2 ">
+        <div class="row g-5">
+            <div class="col-md-8">
+                <article class="blog-post">
+                    <h2 class="display-5 link-body-emphasis mb-1">{{ article.subject }}</h2>
+                    <p class="blog-post-meta">{{ article.created_at }}</p>
+                    <small class="text-body-secondary">by {{ article.user.username }}</small>
+
+                    <p>{{ article.description }}</p>
+
+                </article>
+                <div>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+{% endblock %}
+```

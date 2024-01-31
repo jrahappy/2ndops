@@ -1,0 +1,33 @@
+{% extends "support/_base.html" %}
+
+{% block content %}
+<main class="d-flex flex-column p-2 mb-3">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h4 class="h2">Photo gallery</h4>
+        </div>
+        <hr>
+        <div class="p-2">
+            <a class="btn btn-primary" href="{% url 'support:photo-create' %}">Add new photo</a>
+            <!-- <a class="btn btn-primary" href="{% url 'icases:icase-list' %}">List</a> -->
+        </div>
+    </div>
+    <hr>
+    <hr>
+    <div class="p-2 ">
+        <div class="row g-5">
+            <div class="col-md-8 row-gap-3">
+
+
+
+            </div>
+            <div class="col-md-4">
+
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}
