@@ -89,23 +89,22 @@
 				{% endif %}
 
 				{% else %}
-				<ul class="nav col-9 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 					<li><a href="#" class="nav-link px-2 link-secondary">How it works</a></li>
 					<li><a href="#" class="nav-link px-2 link-body-emphasis">Smile Story</a></li>
 
 				</ul>
+				<div class="dropdown text-end">
+					<ul class="nav col-9 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
+						<li class="nav-item">
+							<a class="btn button " href="{% url 'account_login' %}">Log in</a>
+						</li>
+						<li class="nav-item">
+							<a class="btn button " href="{% url 'account_signup' %}">Sign Up</a>
+						</li>
+					</ul>
+				</div>
 
-
-
-
-				<ul class="nav col-9 col-lg-auto me-lg-auto mb-2 justify-content-end mb-md-0">
-					<li class="nav-item">
-						<a class="btn button " href="{% url 'account_login' %}">Log in</a>
-					</li>
-					<li class="nav-item">
-						<a class="btn button " href="{% url 'account_signup' %}">Sign Up</a>
-					</li>
-				</ul>
 
 
 

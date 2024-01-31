@@ -35,7 +35,6 @@ class PatientCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = (
-            "username",
             "email",
             "first_name",
             "last_name",
@@ -80,7 +79,6 @@ class DoctorCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = (
-            "username",
             "email",
             "first_name",
             "last_name",
